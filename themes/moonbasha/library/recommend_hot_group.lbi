@@ -1,0 +1,40 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $hot_goods} -->
+<!-- {if $script_name eq 'group'} -->
+
+<div class="onlyPageX">
+	<h3>今日热卖</h3>
+    <ul>
+    	<!-- {if $hot_goods} -->
+        <!--{foreach from=$hot_goods item=goods}-->
+        <li>
+        	<a class="track" href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}"><img alt="{$goods.name|escape:html}" src="{$goods.thumb}" width="148" height="215"></a>
+            <p><a class="track" href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a></p>
+            <span><em><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></em><del>{$goods.market_price}</del></span>
+        </li>
+        <!--{/foreach}-->
+        <!-- {/if} -->
+    </ul>
+</div>
+<span class="blank10"></span>
+
+<!-- {else} -->
+
+<!-- {if $cat_rec_sign neq 1} -->
+<div class="GroupHot">
+	<h2>热卖爆款</h2>
+    <div class="GroupHotCon">
+    	<ul class="clearfix">
+        	<!--{foreach from=$hot_goods item=goods}-->
+        	<li>
+            	<a href="{$goods.url}" title="{$goods.name|escape:html}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="200" height="290" /></a>
+                <h3><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a></h3>
+                <div class="pirce"><span><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></span>{$goods.market_price}</div>
+            </li>
+            <!--{/foreach}-->
+        </ul>
+    </div>
+</div>
+<!-- {/if} -->
+<!-- {/if} -->
+<!-- {/if} -->

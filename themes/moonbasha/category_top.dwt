@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='jquery-1.9.1.min.js,jquery.json.js'}
+{insert_scripts files='common.js,global.js,compare.js'}
+<style type="text/css">
+.mainNavBox .allSortBox {
+    display: block;
+}
+#BDBridgeIconWrap{display:none !important;}
+</style>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header_category_top.lbi" --><!-- #EndLibraryItem --> {insert_scripts files='vancl_category.js'}
+
+<div class="Men_focusTab Women_focusTab">
+    <ul class="FocusNum">
+      <li class="hot">1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+	<div id="main" class="FocusTab">
+		<ul>
+            <li>{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类页幻灯片1'}</li>
+            <li>{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类页幻灯片2'}</li>
+            <li>{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类页幻灯片3'}</li>
+            <li>{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类页幻灯片4'}</li>
+            <li>{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类页幻灯片5'}</li>
+    	</ul>
+	</div>
+<script>
+	$(function(){
+		var bodyW = $(window).width();
+		$("#main li").each(function(){
+			$(this).find("img").load(function(){
+				var imgW = $(this).width();
+				$(this).css({"marginLeft":(bodyW-imgW)/2});
+			});
+		});
+		//
+		var FocusNumW = $(".FocusNum").width();
+		$(".FocusNum").css({"right":(bodyW-FocusNumW-240)/2})
+	});
+</script>
+</div>
+
+<div class="Men_main">
+    <div class="CateBrand">
+    	<div style=" width:105%; display:table;">
+        	<!--  主广告下品牌列表 S -->
+			<!-- #BeginLibraryItem "/library/category_brand.lbi" --><!-- #EndLibraryItem -->
+            <!--  主广告下品牌列表 E -->
+            
+            <div style="width:466px; padding:7px 15px 0 0; float:left">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类品牌下广告1'}</div>
+            <div style="width:466px; padding:7px 15px 0 0; float:left">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类品牌下广告2'}</div>
+        </div>
+    </div>
+	<div style="width:105%; display:table; padding-top:10px;">
+    	<div style="padding-right:6px; float:left;">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类页商品分类下广告1'}</div>
+        <div style="padding-right:6px; float:left;">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类页商品分类下广告2'}</div>
+    </div>
+    
+    <!--  主打新品、精品、热卖商品广告 S -->
+    <!-- #BeginLibraryItem "/library/category_mainpro.lbi" --><!-- #EndLibraryItem -->
+    <!--  主打新品、精品、热卖商品广告 E -->
+  
+	<!--{foreach from=$on_top_goods item=top_goods}-->
+	<div class="zt_block e60065">
+    	<div class="title_list">
+        	<div class="title_txt"><a href="{$top_goods.cat_url}" ><span></span>{$top_goods.cat_name}</a></div>
+            <div class="title_key">
+                <dl>
+                    <!--{foreach from=$top_goods.child_cat item=cat name=foo2}-->
+           			<dd><a href="{$cat.url}" target="_blank" title="{$cat.cat_name}">{$cat.cat_name}</a></dd>
+                    <!--{/foreach}-->
+                </dl>
+        	</div>
+		</div>
+
+        <div class="title_body categoryTopCon">
+        	<div class="f_l" style="width:715px;">
+            	<ul>
+                    <li style="margin:12px 0 0 0;">{insert name='ads_pro' cat_name=$top_goods.cat_name type='分类左侧广告1'}</li>
+                    <li style="margin:12px 0 0 0;">{insert name='ads_pro' cat_name=$top_goods.cat_name type='分类左侧广告2'}</li>
+                </ul>
+            </div>
+            <ul class="f_r" style="width:485px;">
+                <!--{foreach from=$top_goods.goods item=goods name=foo}-->  
+                <!--{if $smarty.foreach.foo.iteration < 5}-->
+                <li class="list">
+                    <a href="{$goods.url}" title="{$goods.name}" target="_blank">
+                        <img src="{$goods.thumb}" alt="{$goods.name}" width="228"/>
+                        <div class="titlebg"><span>{$goods.name}</span></div>
+                    </a>
+                </li>
+                <!-- {/if} -->
+                <!--{/foreach}-->
+            </ul>
+        </div>
+    </div>
+	<!--{/foreach}-->  
+    
+    <!-- 底部横幅广告 -->
+    {insert name='ads' id=38 num=1}
+      
+	<!--  底部商品分类 S -->
+    <!-- #BeginLibraryItem "/library/bottom_category.lbi" --><!-- #EndLibraryItem -->
+    <!--  底部商品分类 E -->
+    
+</div>
+
+<div class="blank"></div>
+<div id="footerArea">
+	<!-- #BeginLibraryItem "/library/help.lbi" --> <!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/page_footer_index.lbi" --> <!-- #EndLibraryItem -->
+</div>
+<script>
+	$(function(){
+		// 楼层"F"
+		$(".title_list").each(function(i){
+			$(this).find("span").text((i+1)+"F ");
+		});
+		
+		//  楼层商品名次垂直居中
+		$(".title_body li.list").each(function(){
+			var span = $(this).find("span")
+			var spanH = $(this).find("span").height();
+			if( spanH >= 48 ){
+				span.css({"height":48,"overflow":"hidden"})
+			};
+			var spanXh = $(this).find("span").height();
+			span.css({"top":(90-spanXh)/2})
+		});
+	})
+</script>
+</body>
+
+</html>

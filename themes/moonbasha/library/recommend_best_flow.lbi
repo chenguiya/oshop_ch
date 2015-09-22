@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $best_goods} -->
+<!-- {if $cat_rec_sign neq 1} -->
+<div class="section_content clearfix" >
+    <div id="tabnavs"><h2 class="nstep1_tit2">人气必备</h2></div>
+    <div class="buylist2">
+        <ul class="other-teambuy">
+            <!--{foreach from=$best_goods item=goods}-->
+            <li>
+                <a href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="175" height="254" /></a>
+                <div class="text">
+                    <p class="hpink"><a href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}">{$goods.name|escape:html}</a></p>
+                    <p class="hde"><em><!-- {if $goods.promote_price neq ""} -->{$goods.promote_price}<!-- {else}-->{$goods.shop_price}<!--{/if}--></em><del>{$goods.market_price}</del></p>
+                </div>
+                <a class="pinkbtn" href="javascript:addToCart({$goods.id})">加入购物车</a>
+            </li>
+            <!-- {/foreach} -->
+        </ul>
+        <span class="blank20"></span>
+    </div>
+</div>
+  <!-- {/if} -->
+<!-- {/if} -->

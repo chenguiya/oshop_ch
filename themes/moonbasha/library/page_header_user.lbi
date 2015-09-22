@@ -1,0 +1,138 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{insert_scripts files='jquery-1.9.1.min.js,jquery.json.js,vancl_common.js'}
+{insert_scripts files='transport_jquery.js,utils.js,jquery.SuperSlide.js'}
+<div id="Head">
+	<div class="HeadAd">{insert name='ads' id=20 num=1}<span class="HeadAdColse"><img src="images/colse.gif"></span></div>
+    <div class="HeadBoxCon">
+        <div class="HeadBox">
+            <div class="logo"><a href="index.php"><img src="images/logo.gif"></a></div>
+            <div class="practice"><span>7年品质保证</span>|<span>30天无条件退换货</span></div>
+            <div class="logininfo_outdiv">
+            	<div class="Collection"><a href="javascript:bookmark();" id="vanclFavorite">收藏5U商城</a></div>
+                <div class="helpmsg"><a href="javascript:;" class="weixin on">微信<img src="images/weixin.gif"></a><a href="javascript:;" class="mobile on">手机版<img src="images/download.gif"></a></div>
+            	<div id="ECS_MEMBERZONE" class="loginArea">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}</div>
+            </div>
+            <div class="search_keyw">
+            	<div class="search">
+                	<div class="fsearch">
+                    	<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+                        	<div class="keytext">聚焦时尚潮流 满349减50 千款特卖低至0.6折</div>
+                            <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="ac_input" />
+                            <input type="submit" value="" name="imageField" class="searchBtn">
+                        </form>
+                    </div>
+                    <div class="hot_keywords">
+                    	<ul>
+                        	<!-- {foreach from=$searchkeywords item=val} -->
+                        	<li><a href="search.php?keywords={$val|escape:url}" class="track">{$val}</a><span>|</span></li>
+                            <!-- {/foreach} -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="menuTopRight">
+            	<div id="shoppingCarNone" class="active"> {insert name='cart_info'} </div>
+            </div>
+        </div>
+    </div>
+  
+	<div class="mainNavBox" id="mainNavBox">
+    	<div class="mainNavTop">
+        	<div id="V_Category">
+            	<div class="allSortBox">
+                	<ul>
+                    	<!--{foreach from=$categories item=cat name=foo}-->
+                        <li class="allSortItem">
+                        	<h3><a target="_blank" class="track" href="{$cat.url}">{$cat.name|escape:html}</a></h3>
+                            <div class="allSortp01 clearFix l2">
+                            	<div style="height:21px; overflow:hidden;" >
+                                	<!--{foreach from=$cat.cat_id item=child}--> 
+                                    <a target="_blank" class="track" href="{$child.url}">{$child.name|escape:html}</a> 
+                                    <!--{/foreach}--> 
+                                </div>
+                            </div>
+                            <div class="subCategory">
+                                <div class="subView clearFix" style="display:block;">
+                                    <div class="subViewLeft">
+                                        <!--{foreach from=$cat.cat_id item=child}-->
+                                        <ul class="clearFix">
+                                            <li class="childclass"><a href="{$child.url}" target="_blank" class="track">{$child.name|escape:html}</a></li>
+                                            <li class="childdetail">
+                                                <!--{foreach from=$child.cat_id item=childer}--> 
+                                                <a href="{$childer.url}" target="_blank" class="track">{$childer.name|escape:html}</a><span>|</span> 
+                                                <!--{/foreach}--> 
+                                            </li>
+                                        </ul>
+                                        <!--{/foreach}--> 
+                                    </div>
+                                    <div class="subViewRight">
+                                        <div class="subViewRBar">精选品牌推荐</div>
+                                        <ul class="clearFix catBrandBox">
+                                            <!--{foreach from=$cat.brands item=brands name=no}-->
+                                            <li {if $smarty.foreach.no.index mod 2 eq 1}style="margin-right:0;"{/if}><a target="_blank" class="track" href="{$brands.url}">{if $brands.logo}<img src="../data/brandlogo/{$brands.logo}">{else}{$brands.brand_name}{/if}</a></li>
+                                            <!--{/foreach}-->
+                                        </ul>
+                                        <a target="_blank" class="subViewMoreBrand track" href="brand.php" style="display:none;">更多品牌</a>
+                                    </div>
+                                </div>
+                            </div>
+                		</li>
+                        <!--{/foreach}-->
+                    </ul>
+                </div>
+                <script>
+					$(function(){
+						$(".subViewLeft .childdetail").find("span:last").hide();
+						var lastAllSortItem = $(".allSortBox .allSortItem:last");
+						lastAllSortItem.find(".allSortp01").css({"borderBottom":0});
+						lastAllSortItem.addClass("cur")
+						//
+						var allSortBoxH = $(".allSortBox").height();
+						$(".subCategory").each(function(){
+							var subCategoryH = $(this).height();
+							if( subCategoryH <= allSortBoxH){
+								$(this).css({"height":allSortBoxH+50})
+							}
+						});
+					})
+				</script>
+			</div>
+
+            <div class="mainTextNav clearFix" style="width:1140px; margin:0 auto;">
+                <ul class="mainLeftNav" style="margin-left:0;">
+                    <li><a href="../index.php"{if $navigator_list.config.index eq 1} class="track cur"{/if}>{$lang.home}</a></li>
+                    <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav name=noo} -->
+                    <!-- {if $smarty.foreach.noo.iteration < 8} -->
+                    <li><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} class="track{if $nav.active eq 1} cur{/if}">{$nav.name}</a></li>
+                    <!-- {/if} -->
+                    <!-- {/foreach} -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="blank10"></div>
+<div style="width:1140px; margin:0 auto;">{insert name='ads' id=51 num=1}</div>
+
+<script type="text/javascript">
+function deleteCartGoods(rec_id)
+{
+	Ajax.call('delete_cart_goods.php', 'id='+rec_id, deleteCartGoodsResponse, 'POST', 'JSON');
+}
+
+/**
+ * 接收返回的信息
+ */
+function deleteCartGoodsResponse(res)
+{
+  if (res.error)
+  {
+    alert(res.err_msg);
+  }
+  else
+  {
+	  $("#shoppingCarNone").html(res.content);
+  }
+}
+</script> 

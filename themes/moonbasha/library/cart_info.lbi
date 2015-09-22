@@ -1,0 +1,38 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="top_cart">
+	<a class="shopborder track" href="flow.php" id="shoppingcar_link">购物车<span car_product_total="shoppingCar_product_totalcount">{$number}</span></a>
+</div>
+
+<div class="shopDropList"> 
+    <!--{if $cart_list}-->
+    <div class="havepru">
+    	<div class="havepruMid">
+            <ul>
+            	<!--{foreach from=$cart_list item=goods}-->
+                <li>
+                	<div class="carListLeft"> <a href="{$goods.url}"><img width="36" heigth="36" alt="{$goods.name}" src="{$goods.thumb}"></a></div>
+                    <div class="carListRight">
+                    	<h3><a title="{$goods.name}" href="{$goods.url}">{$goods.short_name}</a></h3>
+                        <div class="priceArea"> <strong>￥{$goods.shop_price}</strong><em>×{$goods.goods_number}</em> </div>
+                    </div>
+                    <div class="carListDelect"> <a style="cursor:pointer;" class="track" href="javascript:deleteCartGoods({$goods.rec_id});">删除</a></div>
+                    <span class="blank0"></span>
+                </li>
+                <!--{/foreach}-->
+            </ul>
+            <div class="ShopCarPage">
+            	<div class="SCtotalpage">
+                	<br>
+                	<div class="clearFix"><span>共<strong>{$number}</strong>件商品</span>合计：<strong>￥{$amount}</strong></div>
+                    <a rel="nofollow" href="flow.php" class="checkout_btn">去结算</a>
+                </div>
+        	</div>
+        </div>
+    </div>
+    <!--{else}-->
+    <div class="shopnopru">
+    	<div class="SCtotalpageno">您的购物车中没有任何商品</div>
+    </div>
+    <!--{/if}-->
+</div>

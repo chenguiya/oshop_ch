@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="MainPro">
+    <h3><img src="images/1934.jpg" /></h3>
+    <div class="MainProCon SlideBox">
+        <div class="hd">
+            <ul>
+                <li>新品上架</li>
+                <li>精品推荐</li>
+                <li>热卖商品</li>
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+            	<li class="left">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类新品左侧广告'}</li>
+                <li class="right">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类新品右侧广告1'}</li>
+                <li class="right">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类新品右侧广告2'}</li>
+            </ul>
+            <ul>
+                <li class="left">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类精品左侧广告'}</li>
+                <li class="right">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类精品右侧广告1'}</li>
+                <li class="right">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类精品右侧广告2'}</li>
+            </ul>
+            <ul>
+                <li class="left">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类热卖左侧广告'}</li>
+                <li class="right">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类热卖右侧广告1'}</li>
+                <li class="right">{insert name='ads_pro' cat_name=$cat_info.cat_name type='顶级分类热卖右侧广告2'}</li>
+            </ul>
+        </div>
+        <script>
+            jQuery(".SlideBox").slide({trigger:"click",delayTime:0});
+        </script>
+    </div>
+</div>

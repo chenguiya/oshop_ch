@@ -1,0 +1,24 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="danpin_colLef">
+	<div class="danpinLeft">
+    	<div class="smallImg">
+        	<div class="smallImgUp upper"></div>
+            <div class="imageMenu">
+                <ul id="imageMenu">
+                    <!-- {if $pictures}--> 
+                    <!-- {foreach from=$pictures item=picture}-->
+                    <li class="track"><center><a class="SpriteSmallImgs" href="{if $picture.img_url}{$picture.img_url}{else}{$picture.thumb_url}{/if}" rel="zoom-id: Zoomer" rev="{if $picture.img_url}{$picture.img_url}{else}{$picture.thumb_url}{/if}"><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_name}"></a></center></li>
+                    <!--{/foreach}--> 
+                    <!-- {/if}-->
+                </ul>
+            </div>
+            <div class="smallImgDown downHover"></div>
+        </div>
+    </div>
+    <div class="danpinColCenter">
+        <div class="bigImg" id="vertical">
+            <a href="{$pictures.0.img_url}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: onlickImg; zoom-distance: 22;zoom-width: 440; zoom-height: 400;"><img id="midimg" src="{$goods.goods_img}" title="{$goods.goods_name|escape:html}"></a>
+            <div id="winSelector" style="left: 0px; top: 36px; display: none; "></div>
+        </div>
+    </div>
+</div>

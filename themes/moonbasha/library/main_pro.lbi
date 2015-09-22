@@ -1,0 +1,30 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="MainPro">
+    <h3><img src="images/1934.jpg" /></h3>
+    <div class="MainProCon SlideBox">
+        <div class="hd">
+            <ul>
+                <li>新品上架</li>
+                <li>精品推荐</li>
+                <li>热卖商品</li>
+            </ul>
+        </div>
+        <div class="bd">
+            <ul>
+                {insert name='ads' id=31 num=1}
+                {insert name='ads' id=32 num=2}
+            </ul>
+            <ul>
+                {insert name='ads' id=33 num=1}
+                {insert name='ads' id=34 num=2}
+            </ul>
+            <ul>
+                {insert name='ads' id=35 num=1}
+                {insert name='ads' id=36 num=2}
+            </ul>
+        </div>
+        <script>
+            jQuery(".SlideBox").slide({trigger:"click",delayTime:0});
+        </script>
+    </div>
+</div>

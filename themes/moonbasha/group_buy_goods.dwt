@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,lefttime.js'}
+{insert_scripts files='magiczoomplus.js,easydialog.min.js,vancl_goods.js'}
+<script type="text/javascript">
+  {foreach from=$lang.js_languages item=item key=key}
+    var {$key} = "{$item}";
+  {/foreach}
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div class="danpinBox">
+	<div class="danpinArea">
+    	<div class="main_left">
+            <div class="breadNav">{$ur_here}</div>
+            <!-- #BeginLibraryItem "/library/goods_gallery_group.lbi" --><!-- #EndLibraryItem -->
+        </div>
+        <div class="danpinRight" style="position:relative;">
+        	<div style="position:absolute; top:10px; right:0; padding-left:16px; height:22px; line-height:22px; z-index:3; background: url(images/1517.jpg) no-repeat;">
+            	<div id="divCountDown">
+                	<span class="CountDown endtime" value="{$group_buy.end_date}" showday="show"></span>
+                </div>
+            </div>
+        	<div class="p_info">
+                <div id="productTitle" class="danpinTitleTab">
+                    <h2 title="{$goods.goods_style_name}">{$gb_goods.goods_name}</h2>
+                </div>
+                <div id="pricearea" name="Normal">
+                	<span class="blank10"></span>
+                    <div class="MSpriceArea"> <span>原价：</span><strong>{$gb_goods.shop_price}</strong></div>
+                    <div class="cuxiaoPrice">
+                    	<span class="tehuiMoney">团购价：</span><strong style="line-height:45px;">{$group_buy.price_ladder.0.formated_price}</strong>
+                    </div>
+                </div>
+                <form action="group_buy.php?act=buy" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
+                	<span class="blank20"></span>
+                    <span class="blank10"></span>
+                    <!-- {foreach from=$specification item=spec key=spec_key} 循环规格开始 --> 
+                    <!-- {if $spec.is_show_img eq 1} -->
+                    <div class="spec_img_box">
+                        <div class="danpinColor_Select">
+                        	<div style="line-height:40px;" class="danpinColorTitle"><p>{$spec.name}</p></div>
+                            <div class="spec_img_list">
+                                <ul>
+                                    <!-- {foreach from=$spec.values item=value key=key} -->
+                                    <li title="{$value.label}" {if $key eq 0}class="onlickSpec"{/if} >
+                                        <div class="colorBlock">
+                                            <a href="{$value.img_original}" rel="zoom-id: Zoomer" rev="{$value.img_original}">
+                                                <img src="{$value.thumb_url}" />
+                                                <p>{$value.label}</p>
+                                            </a>
+                                        </div>
+                                        <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} style="display:none;" />
+                                        <span class="colorHoverok"></span>
+                                    </li>
+                                    <!-- {/foreach} -->
+                                    <input type="hidden" name="spec_list" value="{$key}" />
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- {else} -->
+                    
+                    <div class="spec_box">
+                        <div class="danpinColorTitle"><p style="line-height:25px;">{$spec.name}</p></div>
+                        <div class="spec_list">
+                            <ul>
+                                <!-- {foreach from=$spec.values item=value key=key} -->
+                                <li {if $key eq 0}class="onlickSpec"{/if}>
+                                    <p>{$value.label}</p>
+                                    <span></span>
+                                    <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} style="display:none;" />
+                                </li>
+                                <!-- {/foreach} -->
+                                <input type="hidden" name="spec_list" value="{$key}" />
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- {/if} -->
+                    <!-- {/foreach} -->
+                    
+                    <div class="blank8ie"></div>
+                    <div class="blank0"></div>
+                    <div class="goodsNum">
+                        <div style="line-height:27px;" class="danpinColorTitle"><p>数量</p></div>
+                        <div class="number">
+                            <a onclick="buyNumber.minus()" href="javascript:;" class="minus">-</a><input name="number" id="number" type="text" value="1" class="inp_num" onkeyup="inputOnlyNum(this, 1, 999);" readonly="readonly"><a onclick="buyNumber.plus()" href="javascript:;" class="plus">+</a>
+                        </div>
+                        <span class="stock">
+                            <!-- {if $goods.goods_number neq "" and $cfg.show_goodsnumber} 商品库存-->
+                            <!-- {if $goods.goods_number eq 0} -->
+                            {$lang.goods_number} {$lang.stock_up}1
+                            <!-- {else} --> 
+                            仅剩余{$goods.goods_number}件
+                            <!-- {/if} -->
+                            <!-- {/if} -->
+                        </span> 
+<script type="text/javascript">
+// add by liuguichun 2011-7-19
+var buyNumber = {
+    maxNumber : 100,
+    minNumber : 1,
+    defaultNumber : function(){
+        var defaultnumber = $('#number').attr('value');
+        defaultnumber = parseInt(defaultnumber)
+        if(defaultnumber < 1){
+            defaultnumber = 1;
+        }
+        return defaultnumber;
+    },
+                                                                                                    
+    goodNumber : function(num){
+        if(typeof(num) == 'number'){
+            return $('#number').val(num);
+        }else{
+            return parseInt($('#number').val());
+        }
+                                                                                                        
+    },
+    plus : function(){
+        var num = buyNumber.goodNumber() + buyNumber.defaultNumber();
+        if(num <= buyNumber.maxNumber){
+            buyNumber.goodNumber(num);
+        }
+    },
+    minus : function(){
+        var num = buyNumber.goodNumber() - buyNumber.defaultNumber();
+        if(num >= buyNumber.minNumber){
+            buyNumber.goodNumber(num);
+        }
+    }
+                                                                                                    
+}
+</script> 	
+                    </div>
+                    <span class="blank20"></span>
+                    <span class="blank20"></span>
+                    <div class="shoppingNews">
+                        <ul style="width:auto; margin-left:36px;">
+                            <li><input type="hidden" name="group_buy_id" value="{$group_buy.group_buy_id}" /><input type="submit" value="立即购买" class="dp_gwbtn2" style="cursor:pointer;" /></li>
+                        </ul>
+                    </div>
+                    <span class="blank20"></span>
+                </form>
+                <div class="specialWarm">
+                    <span class="blank5"></span>
+                    <p><span>服务支持：</span>30 天无条件退货；满180 元免运费</p>
+                    <p><span style="letter-spacing:4px;">发货方：</span>5U商城</p>
+                    <div class="blank20"></div>
+                    <div class="blank20"></div>
+                    <div class="blank20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="blank0"></div>
+    </div>
+    <div class="blank25"></div>
+    <div class="sideBarSettabArea">
+    	<div class="sideBarArea">
+        	<!-- TemplateBeginEditable name="详情页左侧广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+			<div id="recommend">
+                <div id="tj"><!-- #BeginLibraryItem "/library/recommend_hot_group.lbi" --><!-- #EndLibraryItem --></div>
+            </div>
+            <!-- TemplateBeginEditable name="本站热卖推荐" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+        </div>
+        <div class="RsetTabArea">
+        	<!-- 商品详情 S -->
+            <div class="rightItem">
+                <div class="goodsimp" id="contentbox1">
+                    <a href="#contentbox1" class="on">商品详情</a>
+                    <a href="#contentbox2">如何支付</a>
+                    <a href="#contentbox3">7天无条件退货 </a>
+                </div>
+                <div class="detail">
+                    <div class="pro_info">{$gb_goods.goods_desc}</div>
+                </div>
+            </div>
+            <!-- 商品详情 E -->
+            
+            <!-- 如何支付 S -->
+            <div class="rightItem">
+                <div class="goodsimp" id="contentbox2">
+                    <a href="#contentbox1">商品详情</a>
+                    <a href="#contentbox2" class="on">如何支付</a>
+                    <a href="#contentbox3">7天无条件退货 </a>
+                </div>
+                <div class="detail">
+                    <div class="payment">
+                        <h3>如何支付</h3>
+                        <div class="paymentMain">
+                            <ul>
+                                <li>
+                                    <b>1.在线支付</b>
+                                    <p>5U商城已开通"快钱"、"支付宝"、"网上银行"、"银联"等多家在线支付方式，支持包括招商银行在内的所有已开通网银功能的银行卡，可实时到帐。进行<i></i>网上 在线支付前，请确认您的银行卡是否开通网上在线支付功能。使用在线支付的顾客可享受优先发货的服务。</p>
+                                </li>
+                                <li>
+                                    <b>2.货到付款</b>
+                                    <p>货到付款支持现金支付和移动POS刷卡支付两种方式，系统会自动根据您的收货地址提供可选择的支付方式。</p>
+                                    <p class="red">注：货到付款无需收取额外手续费，货到付款金额低于15元将不能享受此支付方式。</p>
+                                </li>
+                                <li>
+                                    <b>温馨提示：</b>
+                                    <p>1.以上支付方式是目前顾客在5U商城购物中最常见的支付方式。</p>
+                                    <p>2.其他支付方式请登录5U商城"帮助中心"查看。</p>
+                                    <p>3.非5U商城发货订单不支持货到付款</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 如何支付 E -->
+            
+            <!-- 7天无条件退货 S -->
+            <div class="rightItem">
+                <div class="goodsimp" id="contentbox3">
+                    <a href="#contentbox1">商品详情</a>
+                    <a href="#contentbox2">如何支付</a>
+                    <a href="#contentbox3" class="on">7天无条件退货</a>
+                </div>
+                <div class="detail">
+                    <div class="payment">
+                        <div class="paymentMain">
+                            <ul>
+                                <li style="border:0;">
+                                    <b>5U商城女装退换货规则</b>
+                                    <p style="text-align:center"><img src="images/return_img3.jpg" /></p>
+                                </li>
+                                <li>
+                                    <b>退换货办理流程</b>
+                                    <p style="text-align:center"><img src="images/return_img2.jpg" /></p>
+                                    <b>退换货办理流程：</b>
+                                    <p>因仓库无法接收到付，如您自行寄回退换货商品请先行垫付运费。收到退换货商品后，我们将以礼券形式返还运费，该礼券限下次订购时使用。</p>
+                                    <p>未开通上门服务地区，返还礼券￥10元</p>
+                                    <p>注：同张订单提供首次办理退换货时补贴运费</p>
+                                </li>
+                                <li>
+                                    <b>温馨提示：</b>
+                                    <p>1.目前开通退换货上门办理服务的地区包括：广东、北京、上海（崇明除外）,非5U商城发货订单不支持。</p>
+                                    <p>2.请您务必将退换货的服务单号置入退回的包裹内，一个包裹仅限寄回一张退换货服务单的商品。服务单号自生成之日起7日内有效，<i></i>如未 能在7日内将需要退回的商品寄回，需致电客服确认退、换货需求。</p>
+                                    <p>3.港澳台及海外客户如需办理退、换货服务请先发邮件到：yangyao@ecmoban.com与我们联系。</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 7天无条件退货 E -->
+        </div>
+    </div>
+</div>
+<div id="footerArea">
+	<!-- #BeginLibraryItem "/library/help.lbi" --> <!-- #EndLibraryItem --> 
+    <span class="blank15"></span>
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --> <!-- #EndLibraryItem -->
+</div>
+
+<!-- 右侧悬浮快速导航 -->
+<div id="RightFlNav" class="crollTop GoodsRightFlNav">
+	<h2>快速导航</h2>
+    <a href="#contentbox1">商品详情</a>
+    <a href="#contentbox2">支付信息</a>
+    <a href="#contentbox3">无条件退货</a>
+    <a href="javascript:;" class="ToTop"><img src="images/return.jpg" /></a>
+</div>
+
+<script>
+$(function(){
+	$("#V_Category").hover(function(){
+		$(this).children(".allSortBox").show();
+	},function(){
+		$(this).children(".allSortBox").hide();
+	});
+
+	$(".spec_img_list li,.spec_box li").click(function(){
+		$(this).parent().find("li").removeClass("onlickSpec");
+		$(this).addClass("onlickSpec");
+		$(this).parent().find("input:radio").prop("checked",false);
+		$(this).find("input:radio").prop("checked",true);
+		
+		//changePrice();
+	});
+	
+	$(".spec_img_list .colorBlock a").click(function(){
+	
+		$(this).parents("ul").find("li").removeClass("onlickSpec");
+		$(this).parents("li").addClass("onlickSpec");
+		$(this).parents(".onlickSpec").find("input:radio").prop("checked",false);
+		$(this).parents(".onlickSpec").find("input:radio").prop("checked",true);
+	
+		changePrice();
+	});
+	
+	var main_leftH=$('.main_left').height();
+	var danpinRightH=$('.danpinRight').height();
+	if( main_leftH > danpinRightH ){
+		$('.danpinRight').height(main_leftH);
+	};
+	
+	var RightFlNav = $("#RightFlNav");
+	var bodyW = $(window).width();
+	var RightFlNavW = $("#RightFlNav").outerWidth();
+	RightFlNav.css({"right":(bodyW-1200)/2-RightFlNavW-20});
+	
+	$(window).scroll(function(){
+		var ScrollCon = $(".crollTop");
+		var ScrollTop = $(window).scrollTop();
+		if( ScrollTop>=100 ){
+			ScrollCon.show();
+		}else{
+			ScrollCon.hide();
+		};
+	})
+	//
+	$(".ToTop").click(function(){
+		$('body,html').animate({scrollTop:0},500);
+	});
+
+  setInterval(function(){
+      $(".endtime").each(function(){
+        var obj = $(this);
+        var endTime = new Date(parseInt(obj.attr('value')) * 1000);
+		var show_day =  obj.attr('showday');
+        var nowTime = new Date();
+        var nMS=endTime.getTime() - nowTime.getTime() + 28800000;
+        var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+		var myH_show=Math.floor(nMS/(1000*60*60) % 24);
+        var myH=Math.floor(nMS/(1000*60*60));
+        var myM=Math.floor(nMS/(1000*60)) % 60;
+        var myS=Math.floor(nMS/1000) % 60;
+        var myMS=Math.floor(nMS/100) % 10;
+		var a = myH+myM+myS+myMS;
+        if(a>0){
+			if(show_day == 'show')
+			{
+		
+				var str = '<span>还剩：</span><span class="num">'+myD+'</span>天<span class="num">'+myH_show+'</span>小时<span class="num">'+myM+'</span>分<span class="num">'+myS+'</span>秒'
+				//var str = '还剩<strong class="tcd-d">'+myD+'</strong>天<strong class="tcd-h">'+myH_show+'</strong>小时<strong class="tcd-m">'+myM+'</strong>分<strong class="tcd-s">'+myS+'</strong>秒';
+			}
+			else
+			{
+		
+				var str = '<span>还剩：</span><span class="num">'+myH+'</span>小时<span class="num">'+myM+'</span>分<span class="num">'+myS+'</span>秒';
+			}
+        }else{
+			var str = "已结束！";	
+		}
+		obj.html(str);
+      });
+    }, 100);	
+
+})
+
+</script>
+<script>
+$(".CENdiv").slide({mainCell:".bd ul",titCell:".hd li",autoPlay:true,titOnClassName:"on"});
+</script>
+</body>
+<script type="text/javascript">
+var gmt_end_time = "{$group_buy.gmt_end_date|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var now_time = {$now_time};
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime();
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+</html>

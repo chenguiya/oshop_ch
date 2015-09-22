@@ -1,0 +1,25 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $helps}-->
+<div class="footer">
+	<div class="footerBox">
+        <!-- {foreach from=$helps item=help_cat name=foo} -->
+        <!-- {if $smarty.foreach.foo.iteration < 7} -->
+        <ul>
+            <li class="lititle">{$help_cat.cat_name}</li>
+            <!-- {foreach from=$help_cat.article item=item name=noo} -->
+            <!-- {if $smarty.foreach.noo.iteration < 5} -->
+            <li><a target="_blank" href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></li>
+            <!-- {/if} -->
+            <!-- {/foreach} -->
+        </ul>
+        <!-- {/if} -->
+        <!-- {/foreach} -->
+        <ul>
+        	<li class="lititle">咨询订购</li>
+            <li>400-716-2828</li>
+            <li class="lititle">客户服务</li>
+            <li>400-716-7878</li>
+        </ul>
+    </div>
+</div>
+<!--{/if}-->

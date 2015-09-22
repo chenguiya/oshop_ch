@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<script type="text/javascript">
+function $id(element)
+{
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str)
+{
+  var bt=$id(str+"_b").getElementsByTagName("h2");
+
+  for(var i=0;i<bt.length;i++)
+  {
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+
+    bt[i].onclick=function()
+    {
+      $id(this.subj+"_v").innerHTML=$id(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+
+      for(var j=0;j<$id(this.subj+"_b").getElementsByTagName("h2").length;j++)
+      {
+        var _bt=$id(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+
+  $id(str+"_h").className="none";
+  $id(str+"_v").innerHTML=$id(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->{insert_scripts files='magiczoomplus.js,easydialog.min.js,vancl_goods.js'}
+
+<div class="danpinBox">
+    <div class="danpinArea">
+    	<div class="main_left">
+            <div class="breadNav">{$ur_here}</div>
+            <!-- #BeginLibraryItem "/library/goods_gallery.lbi" --><!-- #EndLibraryItem -->
+        </div>
+        <div class="danpinRight">
+        	<div class="p_info">
+                <div id="productTitle" class="danpinTitleTab">
+                    <h2 title="{$goods.goods_style_name}">{$goods.goods_name}<span><!-- {if $cfg.show_goodssn} 显示商品货号-->( {$goods.goods_sn} )<!-- {/if} --></span></h2>
+                </div>
+                 <form action="exchange.php?act=buy" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY" >
+                 	<div id="pricearea" name="Normal">
+                        <span class="blank10"></span>
+                        <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
+                        <div class="info_list" style="display:none;">{$lang.goods_brand} <a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a> </div>
+                        <!--{/if}-->
+                        
+                        <!-- {if $cfg.show_goodsweight} 商品重量-->
+                        <div class="info_list">{$lang.goods_weight}{$goods.goods_weight} </div>
+                        <!-- {/if} -->
+                        
+                        <!-- {if $cfg.show_marketprice} 市场价格-->
+                        <div class="MSpriceArea"> <span>{$lang.market_price}</span><strong>{$goods.market_price}</strong></div>
+                        <!-- {/if} --> 
+                        
+                        <div class="cuxiaoPrice">
+                            <span class="tehuiMoney">{$lang.exchange_integral}</span><strong style="line-height:45px;">{$goods.exchange_integral}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="selectArea">
+                    	<span class="blank20"></span>
+                        <span class="blank10"></span>
+                        <!-- {* 开始循环所有可选属性 *} --> 
+                        <!-- {foreach from=$specification item=spec key=spec_key} --> 
+                        <!-- {if $spec.attr_type eq 1} --> 
+                        <!-- {if $spec.is_show_img eq 1} -->
+                        <div class="spec_img_box">
+                            <div class="danpinColor_Select">
+                                <div style="line-height:40px;" class="danpinColorTitle"><p>{$spec.name}</p></div>
+                                <div class="spec_img_list">
+                                    <ul>
+                                        <!-- {foreach from=$spec.values item=value key=key} -->
+                                        <li title="{$value.label}" {if $key eq 0}class="onlickSpec"{/if} >
+                                            <div class="colorBlock">
+                                                <a href="{$value.img_original}" rel="zoom-id: Zoomer" rev="{$value.img_original}">
+                                                    <img src="{$value.thumb_url}" />
+                                                    <p>{$value.label}</p>
+                                                </a>
+                                            </div>
+                                            <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} style="display:none;" />
+                                            <span class="colorHoverok"></span>
+                                        </li>
+                                        <!-- {/foreach} -->
+                                        <input type="hidden" name="spec_list" value="{$key}" />
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- {else} -->
+                        <div class="spec_box">
+                            <div class="danpinColorTitle"><p style="line-height:25px;">{$spec.name}</p></div>
+                            <div class="spec_list">
+                                <ul>
+                                    <!-- {foreach from=$spec.values item=value key=key} -->
+                                    <li {if $key eq 0}class="onlickSpec"{/if}>
+                                        <p>{$value.label}</p>
+                                        <span></span>
+                                        <input type="radio" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" {if $key eq 0}checked{/if} style="display:none;" />
+                                    </li>
+                                    <!-- {/foreach} -->
+                                    <input type="hidden" name="spec_list" value="{$key}" />
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- {/if} -->
+                        <!-- {else} -->
+                        <div class="spec_checkbox">
+                            <div class="danpinColorTitle"><p> {$spec.name}：</p></div>
+                            <div class="checkbox_list">
+                                <ul>
+                                    <!-- {foreach from=$spec.values item=value key=key} -->
+                                        <li><p><input type="checkbox" name="spec_{$spec_key}" value="{$value.id}" id="spec_value_{$value.id}" onclick="changePrice()" style="margin-top:2px;*margin-top:0px; float:left;"/>{$value.label}</p></li>
+                                    <!-- {/foreach} -->
+                                    <input type="hidden" name="spec_list" value="{$key}" />
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- {/if} -->
+                        <!-- {/foreach} --> 
+                        <!-- {* 结束循环可选属性 *} -->
+                        
+                        <div class="blank8ie"></div>
+                        <div class="blank0"></div>
+                        <div class="goodsNum">
+                            <div style="line-height:27px;" class="danpinColorTitle"><p>数量</p></div>
+                            <div class="number">
+                            	<a onclick="buyNumber.minus()" href="javascript:;" class="minus">-</a><input name="number" id="number" type="text" value="1" class="inp_num" onkeyup="inputOnlyNum(this, 1, 999);" readonly="readonly"><a onclick="buyNumber.plus()" href="javascript:;" class="plus">+</a>
+                            </div>
+                            <span class="stock">
+                                <!-- {if $goods.goods_number neq "" and $cfg.show_goodsnumber} 商品库存-->
+                                <!-- {if $goods.goods_number eq 0} -->
+                                {$lang.goods_number} {$lang.stock_up}1
+                                <!-- {else} --> 
+                                仅剩余{$goods.goods_number}件
+                                <!-- {/if} -->
+                                <!-- {/if} -->
+                            </span> 
+<script type="text/javascript">
+	// add by liuguichun 2011-7-19
+	var buyNumber = {
+		maxNumber : 100,
+		minNumber : 1,
+		defaultNumber : function(){
+			var defaultnumber = $('#number').attr('value');
+			defaultnumber = parseInt(defaultnumber)
+			if(defaultnumber < 1){
+				defaultnumber = 1;
+			}
+			return defaultnumber;
+		},
+																										
+		goodNumber : function(num){
+			if(typeof(num) == 'number'){
+				return $('#number').val(num);
+			}else{
+				return parseInt($('#number').val());
+			}
+																											
+		},
+		plus : function(){
+			var num = buyNumber.goodNumber() + buyNumber.defaultNumber();
+			if(num <= buyNumber.maxNumber){
+				buyNumber.goodNumber(num);
+			}
+		},
+		minus : function(){
+			var num = buyNumber.goodNumber() - buyNumber.defaultNumber();
+			if(num >= buyNumber.minNumber){
+				buyNumber.goodNumber(num);
+			}
+		}
+																										
+	}
+</script> 	
+                        </div>
+                        <span class="blank20"></span>
+                        <span class="blank20"></span>
+                        <div class="shoppingNews">
+                        	<ul style="width:auto; margin-left:36px;">
+                                <li><input type="hidden" name="goods_id" value="{$goods.goods_id}" /><input type="submit" class="dp_gwbtn2" value="立即兑换" style="cursor:pointer;"></li>
+                            </ul>
+                        </div>
+                        <span class="blank20"></span>
+                    </div>
+                    
+                 </form>
+            </div>
+        </div>
+        <span class="blank0"></span>
+    </div>
+    <div class="blank25"></div>
+    <div class="sideBarSettabArea">
+    	<div class="sideBarArea">
+            {insert name='ads' id=50 num=5}
+        </div>
+        <div class="RsetTabArea">
+        	<!-- 商品详情 S -->
+            <div class="rightItem">
+                <div class="goodsimp" id="contentbox1">
+                    <a href="#contentbox1" class="on">商品详情</a>
+                </div>
+                <div class="detail">
+                    <div class="pro_info">
+                        <b class="info_tit">商品属性</b>
+                        <div class="detail">
+                            <!--{if $properties}--> 
+                            <!-- {foreach from=$properties item=property_group key=key} --> 
+                            <!-- {foreach from=$property_group item=property} -->
+                            <em><b>{$property.name|escape:html}：</b>{$property.value}</em>
+                            <!-- {/foreach}--> 
+                            <!-- {/foreach}--> 
+                            <!-- {/if} -->
+                        </div>
+                    </div>
+                    <div class="pro_info">
+                        <b class="info_tit">商品描述</b>
+                        <div class="detail">{$goods.goods_brief}</div>
+                    </div>
+                    <div class="pro_info">{$goods.goods_desc}</div>
+                </div>
+            </div>
+            <!-- 商品详情 E -->
+        </div>
+    </div>
+</div>
+
+<div id="footerArea">
+	<!-- #BeginLibraryItem "/library/help.lbi" --> <!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/page_footer.lbi" --> <!-- #EndLibraryItem -->
+</div>
+</body>
+
+<script type="text/javascript">
+$(function(){
+	var main_leftH=$('.main_left').height();
+	var danpinRightH=$('.danpinRight').height();
+	if( main_leftH > danpinRightH ){
+		$('.danpinRight').height(main_leftH);
+	};
+	
+	<!-- {literal} -->
+	onload = function()
+	{
+	  fixpng();
+	}
+	<!-- {/literal} -->
+})
+</script>
+</html>

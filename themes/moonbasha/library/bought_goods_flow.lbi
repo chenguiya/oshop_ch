@@ -1,0 +1,20 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $bought_goods} -->
+<div class="onlyPageX GoodsBought">
+	<h3>购买此商品的顾客还购买过</h3>
+    <ul class="clearFix">
+    	<!--{foreach from=$bought_goods item=bought_goods_data}-->
+        <li>
+        	<a class="track" href="{$bought_goods_data.url}" target="_blank" title="{$bought_goods_data.goods_name}"><img alt="{$bought_goods_data.goods_name}" src="{$bought_goods_data.goods_thumb}" width="132" height="190"></a>
+            <em>{$bought_goods_data.market_price}￥99</em>
+            <!-- {if $bought_goods_data.promote_price neq 0} -->
+            <del>{$bought_goods_data.formated_promote_price}</del>
+            <!-- {else} -->
+            <del>{$bought_goods_data.shop_price}</del>
+            <!-- {/if} -->
+        </li>
+        <!-- {/foreach} -->
+    </ul>
+</div>
+<span class="blank20"></span>
+<!-- {/if} -->

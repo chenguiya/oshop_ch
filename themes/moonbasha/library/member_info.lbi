@@ -1,0 +1,35 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<a href="#">帮助中心</a><span style="color:#e8e8e8;">|</span>
+
+<!-- {if $user_info} -->
+
+<a target="_parent" href="user.php?act=logout" class="top track">退出登录</a>
+<span style="color:#e8e8e8">|</span>
+<div class="mymbs">
+	<div class="mymbsTit"><a href="user.php" target="_blank">我的5U商城</a></div>
+	<div class="mymbsCon">
+    	<ul>
+        	<li><a href="#" target="_blank">订单查询</a></li>
+            <li><a href="#" target="_blank">办理退换货</a></li>
+            <li><a href="#" target="_blank">余额查询</a></li>
+        </ul>
+    </div>
+</div>
+<a class="top track" href="user.php">{$user_info.username}</a>
+<span style="padding:0;">您好,</span>
+
+<!-- {else} -->
+
+<a href="user.php?act=register" class="track">注册</a>
+<span style="color:#e8e8e8;">|</span>
+<a href="user.php" class="track">登录</a>
+<span>{$lang.welcome}</span>
+
+<!-- {/if} -->
+<script>
+	$(".mymbs").hover(function(){
+		$(this).addClass("hover")
+	},function(){
+		$(this).removeClass("hover")
+	})
+</script>

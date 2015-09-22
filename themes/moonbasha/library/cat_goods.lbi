@@ -1,0 +1,30 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="title_list">
+	<div class="title_txt"><a href="{$goods_cat.url}" ><span></span>{$goods_cat.name|escape:html}</a></div>
+    <div class="title_key">
+        <dl>
+            <!--{foreach from=$goods_cat.cat_clild item=cat name=foo}-->
+            <!--{foreach from=$cat.children item=cat_c}-->
+            <dd><a href="{$cat_c.url}" target="_blank" title="{$cat_c.name}">{$cat_c.name}</a></dd>
+            <!--{/foreach}-->
+            <!--{/foreach}-->
+        </dl>
+    </div>
+</div>
+<div class="title_body">
+	<ul>
+    	<li>{insert name='ads_pro' cat_name=$goods_cat.name type='分类广告1'}</li>
+        <li>{insert name='ads_pro' cat_name=$goods_cat.name type='分类广告2'}</li>
+        <li>{insert name='ads_pro' cat_name=$goods_cat.name type='分类广告3'}</li>
+        <!--{foreach from=$cat_goods item=goods name=nocat key=key}-->
+        <!--{if $smarty.foreach.nocat.iteration < 6}-->
+        <li class="list">
+            <a href="{$goods.url}" title="{$goods.name}" target="_blank">
+                <img src="{$goods.thumb}" alt="{$goods.name}" width="228"/>
+                <div class="titlebg"><span>{$goods.name}</span></div>
+            </a>
+        </li>
+        <!-- {/if} -->
+        <!--{/foreach}-->
+    </ul>
+</div>

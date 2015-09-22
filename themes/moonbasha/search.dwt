@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='jquery-1.9.1.min.js,jquery.json.js'}
+{insert_scripts files='utils.js,common.js,global.js,compare.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header_category.lbi" --><!-- #EndLibraryItem -->
+<div class="wrapper">
+	{insert name='ads' id=47 num=1}
+    <div class="blank20"></div>
+    <div class="blank10"></div>
+    <div class="sr_contation">
+    	<div id="vjiaTop" class="sr_left" style="width:100%; float:none; clear:both;">
+        	<div style="background-color: White; z-index: 100" id="floatdiv">
+                <Div class="filterFormN5">
+                	<div class="filterForm0703">
+                    	<div class="filterSection">
+                        	<!--{if $goods_list}-->
+                            <form action="search.php" method="post" class="sort" name="listform" id="form">
+                            	<select name="sort">{html_options options=$lang.sort selected=$pager.search.sort}</select>
+                                <select name="order">{html_options options=$lang.order selected=$pager.search.order}</select>
+                                <input type="image" name="imageField" src="../images/bnt_go.gif" alt="go"/>
+                                <input type="hidden" name="page" value="{$pager.page}" />
+                                <input type="hidden" name="display" value="{$pager.display}" id="display" />
+                                <!--{foreach from=$pager.search key=key item=item}-->
+                                <!-- {if $key neq "sort" and $key neq "order"} -->
+                                <!-- {if $key eq 'keywords'} -->
+                                <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+                                <!-- {else} -->
+                                <input type="hidden" name="{$key}" value="{$item}" />
+                                <!-- {/if} -->
+                                <!-- {/if} -->
+                                <!--{/foreach}-->
+                            </form>
+                            <!--{/if}--> 
+                        </div>
+                    </div>
+                </Div>
+            </div>
+            <div class="productList">
+            	<ul class="ContentMonitor">
+                	<!--{if $goods_list}-->
+                    <form action="compare.php" method="post" name="compareForm" id="compareForm" onsubmit="return compareGoods(this);">
+                    	<!--{foreach from=$goods_list item=goods name=foo}-->
+                    	<!-- {if $goods.goods_id} -->
+                        <li id="gItem_{$goods.goods_id}" class="scListArea">
+                        	<strong><a href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}" class="track"> <img src="{$goods.goods_thumb}" class="productLazyLoad" alt="{$goods.name|escape:html}" style="display: inline; "></a> </strong>
+                            <ul class="colorBlock" id="colorBlock">
+                            	<!-- {if $goods.attr_img} -->
+                                <!-- {foreach from=$goods.attr_img item=attr_img name=foo2} -->
+                                <li><a class="changecolor" href="javascript:void(0);"><img src="{$attr_img}"></a></li>
+                                <!--{/foreach}-->
+                                <!-- {else} -->
+                                <li><a class="changecolor" href="javascript:void(0);"><img src="{$goods.goods_thumb}"></a></li>
+                                <!-- {/if} -->
+                            </ul>
+                            <span class="blank0"></span>
+                            <div class="Product-Price"><strong> <!--{if $goods.promote_price neq "" } -->{$goods.promote_price}<!--{else}-->{$goods.shop_price}<!--{/if}--></strong><span class="Mprice"><em><del>{$goods.market_price}</del></em></span></div>
+                            <p class="Product-Name"><a href="{$goods.url}" target="_blank" title="{$goods.name|escape:html}" class="track">{$goods.goods_name}</a></p>
+                            <p class="LiseComment">评论<b>{$goods.comments_number}条</b></p>
+                            <!-- {if $goods.is_best || $goods.is_new || $goods.is_hot} -->
+                            <div class="proBiaoqian">
+                            	<ul>
+                                	<!-- {if $goods.is_new} -->
+                                    <li class="icon01">新品</li>
+                                    <!--{/if}-->
+                                    <!-- {if $goods.is_best} -->
+                                    <li class="icon02">精品</li>
+                                    <!--{/if}-->  
+                                    <!-- {if $goods.is_hot} -->
+                                    <li class="icon03">热卖</li>
+                                    <!--{/if}--> 
+                                </ul>
+                            </div>
+                        	<!--{/if}-->
+                            <div class="Collect"><a href="javascript:collect({$goods.goods_id});">{$lang.btn_collect}</a></div>
+                        </li>
+                        <!--{/if}--> 
+                        <!--{/foreach}-->
+                    </form>
+                    <script type="text/javascript">
+						{foreach from=$lang.compare_js item=item key=key}
+							var {$key} = "{$item}";
+							{/foreach}
+							{foreach from=$lang.compare_js item=item key=key}
+							{if $key neq 'button_compare'}
+							var {$key} = "{$item}";
+							{else}
+							var button_compare = '';
+							{/if}
+						{/foreach}
+						var compare_no_goods = "{$lang.compare_no_goods}";
+						window.onload = function(){
+							Compare.init();
+							fixpng();
+						}
+						var btn_buy = "{$lang.btn_buy}";
+						var is_cancel = "{$lang.is_cancel}";
+						var select_spe = "{$lang.select_spe}";
+					</script>
+                    <!--{else}-->
+                    <div style="padding:20px 0px; text-align:center" class="f5" >{$lang.no_search_result}</div>
+                    <!--{/if}-->
+                </ul>
+            </Div>
+            <div class="blank20"></div>
+            <div class="blank10"></div>
+            <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+        </div>
+        <div class="blank"></div>
+        {insert name='ads' id=48 num=1}
+    </div>
+</div>
+<div id="footerArea">
+	<!-- #BeginLibraryItem "/library/help.lbi" --> <!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --> <!-- #EndLibraryItem -->
+</div>
+
+<script>
+$(function(){
+	$(".colorBlock li").hover(function(){
+		var a = $(this).find("img").attr("src");
+		$(this).parent().find("li").removeClass("onlickBlock");
+		$(this).addClass("onlickBlock");
+		$(this).parents('.scListArea').find('.productLazyLoad').attr('src',a);
+	});
+	
+	$(".productList li.scListArea").hover(function(){
+		$(this).addClass("on");
+	},function(){
+		$(this).removeClass("on");
+	})
+});
+</script>
+
+</body>
+</html>

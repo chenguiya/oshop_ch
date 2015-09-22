@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="sort_Item">
+	<h3><span>商品分类</span><i></i></h3>
+    <ul>
+    	<!--{foreach from=$categories item=cat name=foo}-->
+        <!--{if $smarty.foreach.foo.iteration < 9}-->
+        <li {if $smarty.foreach.foo.index eq 7}class="cur"{/if}>
+        	<strong><a target="_blank" class="track" href="{$cat.url}">{$cat.name|escape:html}</a></strong>
+            <a href="{$cat.url}" target="_blank" class="sort_Iocn sort_Iocn0{$smarty.foreach.foo.iteration}"></a>
+            <p>
+            	<!--{foreach from=$cat.cat_id item=child name=fooo}-->
+                <!--{if $smarty.foreach.fooo.iteration < 5}-->
+                <a target="_blank" class="track" href="{$child.url}">{$child.name|escape:html}</a>
+                <!--{/if}-->
+                <!--{/foreach}-->
+            </p>
+        </li>
+        <!--{/if}-->
+        <!--{/foreach}-->
+    </ul>
+</div>
