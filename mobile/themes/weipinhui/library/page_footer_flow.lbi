@@ -1,0 +1,22 @@
+<div class="footer">
+	<ul>
+    	<li><a href="./">首页</a></li>
+        <li><a href="index.php?m=default&c=user">个人中心</a></li>
+        <li><a href="index.php?m=default&c=flow&a=cart">购物车</a></li>
+        <li><a href="index.php?m=default&c=groupbuy">团购</a></li>
+    </ul>
+    <p>© 2005-2014 ECSHOP 版权所有，并保留所有权利。常年法律顾问：上海华宏律师事务所</p>
+    <div align="center"><a href=" http://www.ecmoban.com" target="_blank"><img src="__TPL__/images/ecmoban.gif" alt="ECShop模板"></a></div>
+</div>
+<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js" ></script> 
+<script type="text/javascript" src="__PUBLIC__/js/jquery.json.js" ></script> 
+<script type="text/javascript" src="__PUBLIC__/js/common.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/jquery.more.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/utils.js" ></script> 
+<script src="__TPL__/js/TouchSlide.1.1.js"></script> 
+<script src="__TPL__/js/ectouch.js"></script> 
+<script src="__TPL__/js/simple-inheritance.min.js"></script> 
+<script src="__TPL__/js/code-photoswipe-1.0.11.min.js"></script> 
+<script src="__PUBLIC__/bootstrap/js/bootstrap.min.js"></script> 
+<script src="__TPL__/js/jquery.scrollUp.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/js/validform.js" ></script> 
