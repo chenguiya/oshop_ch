@@ -23,11 +23,14 @@
 
 <div class="wrapper">
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
-<!-- TemplateBeginEditable name="分类页头部通栏广告" -->
-<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
-{insert name='ads' id=$ads_id num=$ads_num}
- <!-- #EndLibraryItem -->
-<!-- TemplateEndEditable -->
+<!--广告区 start-->
+<p><img src="images/cat_meixi.jpg"></p>
+<p><img src="images/cat_cluo.jpg"></p>
+<p><img src="images/cat_nenmaer.jpg"></p>
+<p><img src="images/cat_jluo.jpg"></p>
+<p><img src="images/cat_beier.jpg"></p>
+<p><img src="images/cat_qita.jpg"></p>
+<!--广告图 end-->
 <!--{foreach from=$categories item=cat}-->
 <!--{if $cat.id eq $cat_level[0]}-->
 <div class="subCategories">

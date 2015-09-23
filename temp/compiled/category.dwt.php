@@ -25,7 +25,12 @@
 <div class="wrapper">
 <?php echo $this->fetch('library/page_header.lbi'); ?>
 
-<?php $this->assign('ads_id','47'); ?><?php $this->assign('ads_num','1'); ?><?php echo $this->fetch('library/ad_position.lbi'); ?>
+<p><img src="themes/moonbasha/images/cat_meixi.jpg"></p>
+<p><img src="themes/moonbasha/images/cat_cluo.jpg"></p>
+<p><img src="themes/moonbasha/images/cat_nenmaer.jpg"></p>
+<p><img src="themes/moonbasha/images/cat_jluo.jpg"></p>
+<p><img src="themes/moonbasha/images/cat_beier.jpg"></p>
+<p><img src="themes/moonbasha/images/cat_qita.jpg"></p>
 
 <?php $_from = $this->_var['categories']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }; $this->push_vars('', 'cat');if (count($_from)):
     foreach ($_from AS $this->_var['cat']):

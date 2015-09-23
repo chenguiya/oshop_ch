@@ -28,17 +28,17 @@
 
 <div class="index_wap">
 <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
-     <p><img src="images/index_w01.png" /></p>
-     <p><img src="images/index_w02.png" /></p>
-     <p><img src="images/index_w03.png" /></p>
-     <p><img src="images/index_w04.png" /></p>
+     <p><img src="images/index_w01.jpg" /></p>
+     <p><img src="images/index_w02.jpg" /></p>
+     <p><img src="images/index_w03.jpg" /></p>
+     <p><img src="images/index_w04.jpg" /></p>
      <div class="index_lists cl">
-          <a href="category.php?id=740"><img src="images/index_list01.png" /></a>
-          <a href="category.php?id=736"><img src="images/index_list02.png" /></a>
-          <a href="category.php?id=748"><img src="images/index_list03.png" /></a>
-          <a href="category.php?id=744"><img src="images/index_list04.png" /></a>
-          <a href="category.php?id=752"><img src="images/index_list05.png" /></a>
-          <a href="category.php?id=756"><img src="images/index_list06.png" /></a>
+          <a href="category.php?id=740"><img src="images/index_list01.jpg" /></a>
+          <a href="category.php?id=736"><img src="images/index_list02.jpg" /></a>
+          <a href="category.php?id=748"><img src="images/index_list03.jpg" /></a>
+          <a href="category.php?id=744"><img src="images/index_list04.jpg" /></a>
+          <a href="category.php?id=752"><img src="images/index_list05.jpg" /></a>
+          <a href="category.php?id=756"><img src="images/index_list06.jpg" /></a>
      </div>
 </div>
 </body>
